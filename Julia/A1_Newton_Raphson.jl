@@ -1,18 +1,18 @@
+# Constant values for the problem
 const a = 1;
 const V_0 = 1;
 const m = 0.5;
 const ħ = 1;
 z0 = sqrt(2*m*V_0/ħ^2);
-# FOR THE EIGENVALUE of the Bound State Energy
-# z^2 = z_0^2 - 2*m*f/ħ^2, f = (z_0^2 - z^2)*ħ^2/(2m)
-
-# IMPORTANT CONDITION: (z_0/z)^2 >= 1, z_0/z >= 1, |z_0| >= |z|
+# FOR THE EIGENVALUE of the Bound State Energy, z^2 = z0^2 - 2*m*f/ħ^2, f = (z0^2 - z^2)*ħ^2/(2m)
+# IMPORTANT CONDITION: (z0/z)^2 >= 1, z0/z >= 1, |z0| >= |z|
 
 f(x) = tan(a*x) - 2*sqrt(((z0/x)^2)-1)/(2 - ((z0/x)^2))
-function f_derivative(x)
+# General Numerical Derivative of function f at point x
+function f_derivative(f::Function, x)
     h = 10^(-8); # precision for derivative
-    f_ = (f(x+h) - f(x-h))/(2*h);
-    return f_
+    return (f(x+h) - f(x-h))/(2*h);
+
 end;
 
 # Newton Raphson Method: x_n = x_(n-1) - f(x)/f'(x)
@@ -35,4 +35,4 @@ root = newtonRaphson(f, f_derivative, trial_val);
 println("Value of root (z): ", root);
 # using the root to find the energy of the bound state
 E = (root^2 - z0^2)*ħ^2/(2*m);
-println("The eigenvalue of the bound state energy is: ", E);
+println("The eigenvalue of the bound state energy is: ", round(E, digits=7));
