@@ -32,7 +32,7 @@ function newtonRaphson(f::Function, dfdx::Function, n)
 end;
 
 root = newtonRaphson(f, f_derivative, trial_val);
-println("Value of root: ", root);
+println("Value of root (z): ", root);
 # using the root to find the energy of the bound state
 E = (root^2 - z0^2)*ħ^2/(2*m);
 println("The eigenvalue of the bound state energy is: ", E);
