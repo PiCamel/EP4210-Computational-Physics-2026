@@ -8,7 +8,7 @@ z0 = sqrt(2*m*V_0/ħ^2);
 
 # IMPORTANT CONDITION: (z_0/z)^2 >= 1, z_0/z >= 1, |z_0| >= |z|
 
-f(x) = tan(a*x) - 2*sqrt((z0/x)^2-1)/(2 - (z0/x)^2)
+f(x) = tan(a*x) - 2*sqrt(((z0/x)^2)-1)/(2 - ((z0/x)^2))
 function f_derivative(x)
     h = 10^(-8); # precision for derivative
     f_ = (f(x+h) - f(x-h))/(2*h);
@@ -16,7 +16,7 @@ function f_derivative(x)
 end;
 
 # Newton Raphson Method: x_n = x_(n-1) - f(x)/f'(x)
-trial_val = 0.8; # -z0 <= z <= z0, trial value for the root finding
+trial_val = 0.95; # -z0 <= z <= z0, trial value for the root finding
 function newtonRaphson(f::Function, dfdx::Function, n)
     ϵ = abs(f(n));
     x = n;
@@ -32,9 +32,7 @@ function newtonRaphson(f::Function, dfdx::Function, n)
 end;
 
 root = newtonRaphson(f, f_derivative, trial_val);
-println(root);
-println(f(root));
-
+println("Value of root: ", root);
 # using the root to find the energy of the bound state
-f = (z0^2 - root^2)*ħ^2/(2*m);
-E = -f
+E = (root^2 - z0^2)*ħ^2/(2*m);
+println("The eigenvalue of the bound state energy is: ", E);
