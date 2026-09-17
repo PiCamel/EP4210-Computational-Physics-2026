@@ -1,14 +1,14 @@
-const dx = 10^(-5) #Value of width of rectangle
+const dx = 10^(-6) #Value of width of rectangle
 
 #taking tiny rectangular strips to calculate area
 function integral_rect(f::Function, a, b)
     sum = 0
     x = a
     while x < b
-        sum += f(x)*dx
+        sum += f(x)
         x += dx
     end
-    return sum
+    return sum*dx
 end
 
 #taking trapezoidal areas to calculate area
@@ -16,10 +16,10 @@ function integral_trpz(f::Function, a, b)
     sum = 0
     x = a
     while x<=(b-dx)
-        sum += (f(x) + f(x+dx))*dx/2
+        sum += (f(x) + f(x+dx))/2
         x += dx
     end
-    return sum
+    return sum*dx
 end
 #limits for integration
 n0 = 0
