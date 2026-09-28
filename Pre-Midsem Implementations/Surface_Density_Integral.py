@@ -1,6 +1,6 @@
 import numpy as np
 
-N = int(1e4)
+N = int(1e4) # O(N^2), very bad for scaling
 ax = -1.0
 bx = 1.0
 dx = (bx-ax)/N
