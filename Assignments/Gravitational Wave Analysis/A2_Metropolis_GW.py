@@ -2,8 +2,6 @@ import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
 
-# true values ~ (1.4, 4, 10) probably, from least squares
-# aryan's values ~ (0.05, 3.8, 10)
 def h(t, alpha, beta, gamma):
     return alpha*np.exp(t)*(1-np.tanh(2*(t-beta)))*np.sin(gamma*t)
 
